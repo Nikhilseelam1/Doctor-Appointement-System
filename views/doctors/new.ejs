@@ -1,0 +1,62 @@
+<%= layout("/layouts/Boilerplate") %>
+
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
+                <div class="card shadow-sm rounded-4">
+                    <div class="card-header bg-dark text-white text-center">
+                        <h3 class="mb-0">Add New Doctor</h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <form method="post" action="/doctors" novalidate class="needs-validation">
+
+                            <div class="mb-3">
+                                <label for="Name" class="form-label">Name</label>
+                                <input type="text" name="doctor[Name]" placeholder="Enter Name" class="form-control" required>
+                                <div class="valid-feedback">Name looks good!</div>
+                                <div class="invalid-feedback">Please enter the name.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="Specification" class="form-label">Specification</label>
+                                <input type="text" name="doctor[Specification]" placeholder="Enter Specification" class="form-control" required>
+                                <div class="invalid-feedback">Please enter specification!</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="Image" class="form-label">Image File</label>
+                                <input type="file" name="doctor[Image]" class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="Age" class="form-label">Age</label>
+                                <input type="number" name="doctor[Age]" placeholder="Enter Age" class="form-control" required>
+                                <div class="invalid-feedback">Please enter a valid age.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" name="doctor[email]" placeholder="Enter Email" class="form-control" required>
+                                <div class="invalid-feedback">Please enter a valid email.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" name="doctor[password]" placeholder="Enter Password" minlength="6" class="form-control" required>
+                                <div class="invalid-feedback">Please enter a password (min 6 chars).</div>
+                            </div>
+
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-dark btn-lg shadow-sm">Add Doctor</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+</body>

@@ -1,0 +1,143 @@
+<style>
+.navbar {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 0.8rem 2rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #1E90FF !important;
+}
+.navbar-brand i {
+  font-size: 40px;
+  color: #1E90FF;
+  margin-right: 8px;
+}
+
+.navbar-nav .nav-link {
+  margin-right: 1.2rem;
+  font-weight: 500;
+  color: #333 !important;
+  transition: color 0.3s ease;
+}
+.navbar-nav .nav-link:hover {
+  color: #1E90FF !important;
+}
+
+.navbar .btn {
+  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #1E90FF;
+  border: none;
+}
+.btn-primary:hover {
+  background-color: #0b74d1;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border: none;
+}
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.search-inp {
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  padding: 0.45rem 1rem;
+  font-size: 0.9rem;
+  width: 200px;
+  transition: 0.3s;
+}
+.search-inp:focus {
+  outline: none;
+  border-color: #1E90FF;
+  box-shadow: 0 0 0 0.2rem rgba(30, 144, 255, 0.25);
+}
+
+.search-btn {
+  border-radius: 25px;
+  background-color: #fe424d;
+  color: #fff;
+  border: none;
+  padding: 0.45rem 1rem;
+  transition: 0.3s;
+}
+.search-btn:hover {
+  background-color: #d93840;
+}
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="/">
+      <i class="fa-solid fa-user-doctor"></i> MedConnect
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/doctors">Doctors</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+      </ul>
+
+      <form class="d-flex me-3" action="/doctors/search" method="GET">
+          <input 
+              class="search-inp shadow-sm rounded-pill px-3" 
+              type="search" 
+              name="spec"
+              placeholder="Search doctors..." 
+              value="<%= typeof spec !== 'undefined' ? spec : '' %>"
+          />
+          <button class="search-btn btn btn-primary ms-2 shadow-sm rounded-circle" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+</form>
+
+
+      <div class="d-flex gap-2">
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            Doctor
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/doctors/new">Register</a></li>
+            <li><a class="dropdown-item" href="/doctors/login">Login</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            Patient
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/patient/new">Register</a></li>
+            <li><a class="dropdown-item" href="/p/login">Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,53 @@
+<% layout("/layouts/Boilerplate") %>
+
+<div class="container py-5">
+    <% if (appointement.length === 0) { %>
+        <div class="alert alert-info text-center">You have no appointments yet.</div>
+    <% } else { %>
+        <div class="table-responsive shadow-sm rounded-4">
+            <table class="table table-bordered table-striped align-middle text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Doctor</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% appointement.forEach(a => { %>
+                        <tr>
+                            <td><%= a.doctorId.Name %></td>
+                            <td><%= a.date.toDateString() %></td>
+                            <td><%= a.time %></td>
+                            <td>
+                                <% if(!a.status || a.status === 'Pending') { %>
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                <% } else if(a.status === 'Accepted') { %>
+                                    <span class="badge bg-success">Accepted</span>
+                                <% } else { %>
+                                    <span class="badge bg-danger">Rejected</span>
+                                <% } %>
+                            </td>
+                            <td>
+                                <% if (a.status === 'Pending') { %>
+                                    <form 
+                                        action="/patient/cancel/<%= a._id %>" 
+                                        method="POST" 
+                                        style="display:inline;" 
+                                        onsubmit="return confirm('Are you sure you want to cancel this appointment?');"
+                                    >
+                                        <button type="submit" class="btn btn-danger btn-sm shadow-sm">Cancel</button>
+                                    </form>
+                                <% } else { %>
+                                    <span class="text-muted">-----</span>
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
+</div>

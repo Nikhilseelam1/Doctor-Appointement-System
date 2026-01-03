@@ -1,0 +1,45 @@
+<% layout("/layouts/Boilerplate") %>
+
+<div class="row g-4 mx-0">
+  <% if (alldoctors.length === 0) { %>
+    <p class="text-center text-muted">No doctors found with this specialization.</p>
+  <% } %>
+
+  <div class="container py-5">
+    <div class="row g-4">
+      <% alldoctors.forEach(doc => { 
+           const imgPath = doc.Image.replace(/\\/g, '/').startsWith('/') 
+                           ? doc.Image.replace(/\\/g, '/')
+                           : '/' + doc.Image.replace(/\\/g, '/');
+      %>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <a href="/doctors/<%= doc._id %>" class="doctor-link">
+            <div class="card doctor-card h-100 shadow-sm border-0">
+              <div class="doctor-img-wrapper">
+                <img 
+                  src="<%= imgPath %>" 
+                  alt="<%= doc.Name %>"
+                  class="card-img-top"
+                  onerror="this.src='/images/default-doctor.jpg';"
+                >
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><%= doc.Name %></h5>
+                <p class="card-text">
+                  <i class="fa-solid fa-stethoscope"></i>
+                  <%= doc.Specification %>
+                </p>
+                <% if(doc.Age) { %>
+                  <p class="card-text">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <%= doc.Age %> years old
+                  </p>
+                <% } %>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</div>

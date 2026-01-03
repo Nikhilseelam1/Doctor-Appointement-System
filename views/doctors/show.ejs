@@ -1,0 +1,47 @@
+<% layout("/layouts/Boilerplate") %>
+
+<%
+    const imgPath = doctor_d.Image.replace(/\\/g, '/').startsWith('/')
+        ? doctor_d.Image.replace(/\\/g, '/')
+        : '/' + doctor_d.Image.replace(/\\/g, '/');
+%>
+
+<div class="container py-5">
+  <div class="card doctor-card mx-auto shadow-lg border-0 rounded-4 hover-up" 
+       style="max-width: 720px; overflow: hidden; background: #fff;">
+       
+    <div class="doctor-img-wrapper position-relative">
+      <img 
+        src="<%= imgPath %>" 
+        class="card-img-top doctor-profile-img"
+        alt="<%= doctor_d.Name %>"
+        onerror="this.src='/images/default-doctor.jpg';"
+      >
+    </div>
+
+    <div class="card-body text-center p-4">
+      <h3 class="card-title mb-2 fw-bold text-dark"><%= doctor_d.Name %></h3>
+
+      <% if (doctor_d.Age) { %>
+        <p class="card-text text-muted mb-1">
+          <i class="fa-solid fa-calendar-days me-2 text-success"></i>
+          Age: <%= doctor_d.Age %>
+        </p>
+      <% } %>
+
+      <p class="card-text text-muted mb-4">
+        <i class="fa-solid fa-stethoscope me-2 text-primary"></i>
+        Specialization: <%= doctor_d.Specification %>
+      </p>
+
+      <form action="/doctors/<%= doctor_d._id %>/book">
+        <button class="btn btn-success btn-lg w-75 fw-bold shadow-sm">
+          Book Appointment
+        </button>
+      </form>
+      <form action="/doctors/<%= doctor_d._id %>/delete" method="post"> 
+        <button>delete</button>
+      </form>
+    </div>
+  </div>
+</div>

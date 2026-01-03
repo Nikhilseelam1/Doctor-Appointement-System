@@ -1,0 +1,60 @@
+<% layout("/layouts/Boilerplate") %>
+
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Appointments for Dr. <%= doctor_det.Name %></h2>
+
+    <% if (appointement.length === 0) { %>
+        <div class="alert alert-info text-center">No appointments yet.</div>
+    <% } else { %>
+        <div class="table-responsive shadow-sm rounded-4">
+            <table class="table table-bordered table-striped align-middle">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i=0; i<appointement.length; i++){ 
+                        let app = appointement[i]; %>
+                        <tr class="text-center align-middle">
+                            <td><%= app.patientName %></td>
+                            <td><%= app.patientEmail %></td>
+                            <td><%= app.patientPhone %></td>
+                            <td><%= app.date.toDateString() %></td>
+                            <td><%= app.time %></td>
+                            <td>
+                                <% if(!app.status || app.status === "Pending") { %>
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                <% } else if(app.status === "Accepted") { %>
+                                    <span class="badge bg-success">Accepted</span>
+                                <% } else { %>
+                                    <span class="badge bg-danger">Rejected</span>
+                                <% } %>
+                            </td>
+                            <td>
+                                <% if(!app.status || app.status === "Pending") { %>
+                                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
+                                        <form action="/appointements/<%= app._id %>/accept/<%= app.doctorId%>" method="post">
+                                            <button type="submit" class="btn btn-success btn-sm shadow-sm">Accept</button>
+                                        </form>
+                                        <form action="/appointements/<%= app._id %>/reject/<%= app.doctorId%>" method="post">
+                                            <button type="submit" class="btn btn-danger btn-sm shadow-sm">Reject</button>
+                                        </form>
+                                    </div>
+                                <% } else { %>
+                                    <span>Action Taken</span>
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
+</div>

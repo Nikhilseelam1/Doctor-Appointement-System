@@ -1,0 +1,76 @@
+<% layout("/layouts/Boilerplate") %>
+
+<div class="container py-5">
+    <div class="card doctor-card mx-auto shadow-lg border-0 rounded-4" style="max-width: 600px;">
+        <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+            <h3 class="mb-0">Book Appointment with <%= doctors.Name %></h3>
+        </div>
+
+        <div class="card-body p-4">
+            <form method="post" action="/doctors/<%= doctors._id %>/book" class="needs-validation" novalidate>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Patient Name</label>
+                    <input type="text" name="patientName" class="form-control" placeholder="Enter your name" required>
+                    <div class="invalid-feedback">
+                        Please enter your name.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Patient Phone</label>
+                    <input type="tel" name="patientPhone" class="form-control" placeholder="10-digit phone number" pattern="[0-9]{10}" required>
+                    <div class="invalid-feedback">
+                        Please enter a 10-digit phone number.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Appointment Date</label>
+                    <input type="date" name="date" class="form-control" required>
+                    <div class="invalid-feedback">
+                        Please select a date.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Appointment Time</label>
+                    <input type="time" name="time" class="form-control" required>
+                    <div class="invalid-feedback">
+                        Please select a time.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Patient Email</label>
+                    <input type="email" name="patientEmail" class="form-control" placeholder="Enter your email" required>
+                    <div class="invalid-feedback">
+                        Please enter a valid email.
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn btn-success btn-lg me-2 shadow-sm">Book Appointment</button>
+                    <a href="/doctors/<%= doctors._id %>" class="btn btn-secondary btn-lg shadow-sm">Back</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    'use strict'
+    const forms = document.querySelectorAll('.needs-validation')
+    Array.from(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+        }, false)
+    })
+})();
+</script>

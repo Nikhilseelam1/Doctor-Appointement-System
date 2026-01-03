@@ -1,0 +1,46 @@
+<%= layout("/layouts/Boilerplate") %>
+
+<div class="container py-5">
+    <div class="card doctor-card mx-auto shadow-lg border-0 rounded-4" style="max-width: 400px;">
+        <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+            <h3 class="mb-0">Doctor Login</h3>
+        </div>
+
+        <div class="card-body p-4">
+            <form method="post" action="/doctors/login" class="needs-validation" novalidate>
+                
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-semibold">Email</label>
+                    <input type="email" name="doctor[email]" placeholder="Enter Email" class="form-control" required>
+                    <div class="invalid-feedback">Please enter a valid email.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label fw-semibold">Password</label>
+                    <input type="password" name="doctor[password]" placeholder="Enter Password" class="form-control" required>
+                    <div class="invalid-feedback">Please enter a password.</div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn btn-success btn-lg shadow-sm">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    'use strict'
+    const forms = document.querySelectorAll('.needs-validation')
+    Array.from(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+        }, false)
+    })
+})();
+</script>
