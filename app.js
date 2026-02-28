@@ -267,7 +267,7 @@ app.use((err,req,res,next)=>{
     let{statuscode=505,message="something went wrong"}=err;
     res.status(statuscode).send(message);
 })
-//  port
+//  port run in local host 8080
 app.listen(8080,()=>{
     console.log("server is running on port 8080")
 })
